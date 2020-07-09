@@ -9,6 +9,7 @@ import { useStore } from "../src/store/store";
 
 import Header from "../src/ui/Header";
 import DialogManager from "../src/dialogs/DialogManager";
+import Footer from "../src/ui/Footer";
 
 const MyApp = (props) => {
   const { Component, pageProps } = props;
@@ -50,6 +51,8 @@ const MyApp = (props) => {
           <DialogManager />
 
           <Component {...pageProps} />
+
+          <Footer/>
         </Provider>
       </ThemeProvider>
     </Fragment>
