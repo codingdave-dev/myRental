@@ -34,7 +34,7 @@ const footerRoutes = [
 
 function Copyright({ websiteName, websiteURL }) {
     return (
-        <Typography variant="body2" color="textSecondary" align="center">
+        <Typography variant="body2" color="textSecondary" align={"center"}>
             {"Copyright © "}
             <Link color="inherit" href={websiteURL}>
                 {websiteName}
@@ -52,15 +52,18 @@ const Footer = () => {
     return (
         <Grid
             container
-            justify={"center"}
             direction={"column"}
-            style={{ marginTop: "8em" }}
+            style={{ marginTop: "6em", marginBottom: "4em" }}
         >
-            <Grid item>
-                <Grid item container justify={"center"} spacing={2}>
+            <Grid item style={{ backgroundColor: "red" }}>
+                <Grid item container justify={"center"}>
                     {footerRoutes.map((route) => (
-                        <Grid key={route.id} item>
-                            <Typography variant={"body2"} align="center">
+                        <Grid
+                            key={route.id}
+                            item
+                            style={{ paddingLeft: "1em", paddingRight: "1em" }}
+                        >
+                            <Typography variant={"body2"}>
                                 <Link
                                     color="inherit"
                                     href={route.link}
