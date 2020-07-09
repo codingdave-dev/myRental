@@ -55,7 +55,7 @@ const Footer = () => {
             direction={"column"}
             style={{ marginTop: "6em", marginBottom: "4em" }}
         >
-            <Grid item style={{ backgroundColor: "red" }}>
+            <Grid item>
                 <Grid item container justify={"center"}>
                     {footerRoutes.map((route) => (
                         <Grid
