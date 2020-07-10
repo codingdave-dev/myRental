@@ -45,6 +45,17 @@ function Copyright({ websiteName, websiteURL }) {
     );
 }
 
+function DesignedBy() {
+    return (
+        <Typography variant="body2" color="textSecondary" align={"center"}>
+            {"Designed and Developed by "}
+            <Link color="inherit" href={'https://codingdave.com'}>
+                Coding Dave
+            </Link>{'.'}
+        </Typography>
+    );
+}
+
 const Footer = () => {
     const classes = useStyles();
     const theme = useTheme();
@@ -75,6 +86,9 @@ const Footer = () => {
                         </Grid>
                     ))}
                 </Grid>
+            </Grid>
+            <Grid item style={{ marginTop: "0.8em" }}>
+                <DesignedBy/>
             </Grid>
             <Grid item style={{ marginTop: "0.8em" }}>
                 <Copyright
