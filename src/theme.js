@@ -1,7 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const dougiesPurple = '#7100E3'
-const white = '#fff'
+const themeMain = '#ff3333'
+
 const textGrey = '#4d4d4d'
 const green = '#009900'
 const error = '#ff3333'
@@ -9,21 +9,9 @@ const error = '#ff3333'
 
 // Create a theme instance.
 const theme = createMuiTheme({
-    palette: {
-        primary: {
-            main: dougiesPurple,
-        },
-        secondary: {
-            main: textGrey,
-        },
-        common: {
-          green: green,
-            grey: textGrey
-        },
-        error: {
-            main: error,
-        },
-    },
+    // palette: {
+    //
+    // },
     typography: {
         tab: {
             fontFamily: 'Raleway',
@@ -32,24 +20,24 @@ const theme = createMuiTheme({
             fontSize: '1rem',
         },
         h1: {
-            color: dougiesPurple,
+            color: themeMain,
             fontFamily:'Raleway',
             fontWeight: 400,
             fontSize: '5rem',
         },
         h3: {
-            color: dougiesPurple,
+            color: themeMain,
             fontFamily:'Raleway',
             fontWeight: 400,
             fontSize: '3rem',
         },
         h5: {
-            color: dougiesPurple,
+            color: themeMain,
             fontFamily: 'Raleway',
             fontSize: '2rem'
         },
         h6: {
-            color: dougiesPurple,
+            color: themeMain,
             fontFamily: 'Raleway',
             fontSize: '1.5rem'
         },
@@ -90,7 +78,7 @@ const theme = createMuiTheme({
         },
         MuiRating: {
             root: {
-                color: dougiesPurple
+                color: themeMain
             }
         },
 

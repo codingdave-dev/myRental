@@ -9,11 +9,6 @@ const useStyles = makeStyles((theme) => ({
     // ADD STYLES HERE
 }));
 
-const footerDetails = {
-    websiteName: "Coding Dave",
-    websiteURL: "http://www.codingdave.dev",
-};
-
 const footerRoutes = [
     {
         id: 1,
@@ -32,6 +27,12 @@ const footerRoutes = [
     },
 ];
 
+const footerDetails = {
+    websiteName: "Coding Dave",
+    websiteURL: "http://www.codingdave.dev",
+};
+
+// PAGE COPYRIGHT INFO
 function Copyright({ websiteName, websiteURL }) {
     return (
         <Typography variant="body2" color="textSecondary" align={"center"}>
@@ -44,7 +45,7 @@ function Copyright({ websiteName, websiteURL }) {
         </Typography>
     );
 }
-
+// DESIGNED BY INFO
 function DesignedBy() {
     return (
         <Typography variant="body2" color="textSecondary" align={"center"}>

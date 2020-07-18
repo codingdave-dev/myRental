@@ -26,14 +26,11 @@ const MyApp = (props) => {
     }
   }, []);
 
-  // store.firebaseAuthIsReady.then(() => {
-  //   setAuthLoaded(true)
-  // })
 
   return (
     <Fragment>
       <Head>
-        <title>Dougies Guide</title>
+        <title>ENTER PAGE TITLE HERE</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"

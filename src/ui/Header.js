@@ -160,8 +160,6 @@ const Header = ({
   const authenticated = auth.isLoaded && !auth.isEmpty && profile.isLoaded && !profile.isEmpty;
 
 
-
-
   // SIGNIN/SIGNOUT/REGISTER HANDLERS
   const handleRegister = () => {
     openDialog("RegisterDialog");
@@ -198,6 +196,8 @@ const Header = ({
     setSelectedIndex(i);
   };
 
+  // MENU OPTIONS
+
   const authMenuOptions = [
     {
       name: "Add Listing",
@@ -230,6 +230,10 @@ const Header = ({
       onClick: () => handleRegister(),
     },
   ];
+
+
+
+
 
   useEffect(() => {
     [...authMenuOptions, ...authRoutes, ...routes].forEach((route) => {
