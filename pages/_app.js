@@ -11,12 +11,30 @@ import Header from "../src/ui/Header";
 import DialogManager from "../src/dialogs/DialogManager";
 import Footer from "../src/ui/Footer";
 
+import firebase from '../src/config/firebase'
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { createFirestoreInstance } from "redux-firestore";
+
 const MyApp = (props) => {
   const { Component, pageProps } = props;
   const store = useStore(pageProps.initialReduxState);
 
   const [value, setValue] = useState(0);
   const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const reactReduxFirestoreConfig = {
+    userProfile: "users",
+    attachAuthIsReady: true,
+    useFirestoreForProfile: true,
+    updateProfileOnLogin: false,
+  };
+
+  const rrfProps = {
+    firebase,
+    config: reactReduxFirestoreConfig,
+    dispatch: store.dispatch,
+    createFirestoreInstance,
+  };
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -38,18 +56,21 @@ const MyApp = (props) => {
       </Head>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <Header
-            value={value}
-            setValue={setValue}
-            selectedIndex={selectedIndex}
-            setSelectedIndex={setSelectedIndex}
-          />
+          <ReactReduxFirebaseProvider {...rrfProps}>
+            <Header
+                value={value}
+                setValue={setValue}
+                selectedIndex={selectedIndex}
+                setSelectedIndex={setSelectedIndex}
+            />
 
-          <DialogManager />
+            <DialogManager />
 
-          <Component {...pageProps} />
+            <Component {...pageProps} />
 
-          <Footer/>
+            <Footer/>
+          </ReactReduxFirebaseProvider>
+
         </Provider>
       </ThemeProvider>
     </Fragment>
