@@ -9,12 +9,12 @@ import { getFirebase, reactReduxFirebase } from "react-redux-firebase";
 
 import firebase from "../config/firebase";
 
-// const reactReduxFirestoreConfig = {
-//   userProfile: "users",
-//   attachAuthIsReady: true,
-//   useFirestoreForProfile: true,
-//   updateProfileOnLogin: false,
-// };
+const reactReduxFirestoreConfig = {
+  userProfile: "users",
+  attachAuthIsReady: true,
+  useFirestoreForProfile: true,
+  updateProfileOnLogin: false,
+};
 
 let store;
 
@@ -24,9 +24,9 @@ function initStore(initialState) {
   ];
 
   const composedEnhancer = composeWithDevTools(
-    applyMiddleware(...middlewares),
-    // reactReduxFirebase(firebase, reactReduxFirestoreConfig),
-    reduxFirestore(firebase)
+      applyMiddleware(...middlewares),
+      reactReduxFirebase(firebase, reactReduxFirestoreConfig),
+      reduxFirestore(firebase)
   );
 
   return createStore(rootReducer, initialState, composedEnhancer);
