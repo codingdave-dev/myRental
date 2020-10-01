@@ -19,6 +19,7 @@ export const registerUser = (creds) => {
         fullName: creds.firstName + ' ' + creds.lastName,
         admin: false,
         disabled: false,
+        avatar: '/assets/avatar/user.png',
         createdAt: firestore.FieldValue.serverTimestamp()
       }
 

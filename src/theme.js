@@ -5,6 +5,7 @@ const themeMain = "#00ACA0";
 const themeBackground = "#F8F8F8";
 
 const textGrey = "#4d4d4d";
+const hyperlinkBlue = '#0000EE'
 
 
 // Create a theme instance.
@@ -15,6 +16,7 @@ const theme = createMuiTheme({
     },
     common: {
       background: themeBackground,
+      hyperlink: hyperlinkBlue
     },
   },
   typography: {

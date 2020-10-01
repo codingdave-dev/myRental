@@ -26,6 +26,7 @@ import { logout } from "../store/actions/authActions/authActions";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
+import { useRouter } from "next/router";
 
 const actions = {
   logout,
@@ -70,9 +71,9 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbarMargin: {
     ...theme.mixins.toolbar,
-    marginBottom: "3em",
+    marginBottom: "1em",
     [theme.breakpoints.down("md")]: {
-      marginBottom: "2em",
+      marginBottom: "1em",
     },
   },
   drawerItem: {
@@ -108,30 +109,53 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "25px",
   },
   userContainer: {
-    marginRight: '1em'
+    marginRight: "1em",
   },
   userInfoContainer: {
-    marginRight: '0.7em'
+    marginRight: "0.7em",
   },
   userName: {
     color: theme.palette.common.white,
-    fontWeight: 600
+    fontWeight: 600,
   },
   userLocation: {
-
-  }
+    color: theme.palette.common.hyperlink,
+  },
 }));
 
-const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
+const Header = ({
+  value,
+  setValue,
+  selectedIndex,
+  setSelectedIndex,
+  auth,
+  profile,
+  logout,
+}) => {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|ipod/.test(navigator.userAgent);
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const router = useRouter();
 
-  const [openDrawer, setOpenDrawer] = useState(true);
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleUserMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleUserMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleChange = (e, newValue) => {
     setValue(newValue);
+  };
+
+  const handleSignOut = () => {
+    // handleUserMenuClose()
+    logout();
   };
 
   const routes = [
@@ -147,6 +171,9 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
   ];
 
   useEffect(() => {
+    if (auth.isLoaded === true && auth.isEmpty === true) {
+      router.push({ pathname: "/" });
+    }
     [...routes].forEach((route) => {
       switch (window.location.pathname) {
         case `${route.link}`:
@@ -161,7 +188,7 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
           break;
       }
     });
-  }, [value, setValue, selectedIndex, setSelectedIndex, routes]);
+  }, [value, setValue, selectedIndex, setSelectedIndex, routes, auth]);
 
   const tabs = (
     <Fragment>
@@ -175,11 +202,7 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
             label={route.name}
           />
         ))}
-
-
       </Tabs>
-
-
     </Fragment>
   );
 
@@ -225,8 +248,6 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
       >
         <MenuIcon className={classes.drawerIcon} />
       </IconButton>
-
-
     </Fragment>
   );
 
@@ -236,20 +257,84 @@ const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
         <AppBar position={"fixed"} className={classes.appBar}>
           <Toolbar disableGutters>
             {matches ? drawer : tabs}
-            <div style={{marginLeft: 'auto'}}>
+            <div style={{ marginLeft: "auto" }}>
               <Grid item container className={classes.userContainer}>
                 <Grid item className={classes.userInfoContainer}>
-                  <Grid item container direction={'column'} alignItems={'flex-end'} >
+                  <Grid
+                    item
+                    container
+                    direction={"column"}
+                    alignItems={"flex-end"}
+                  >
                     <Grid item>
-                      <Typography variant={'caption'} className={classes.userName}>Full Name</Typography>
+                      <Typography
+                        variant={"caption"}
+                        className={classes.userName}
+                      >
+                        {profile.fullName}
+                      </Typography>
                     </Grid>
                     <Grid item>
-                      <Typography variant={'caption'} className={classes.userLocation}>Location</Typography>
+                      <Typography
+                        variant={"caption"}
+                        className={classes.userLocation}
+                      >
+                        Location
+                      </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
                 <Grid item>
-                  <Avatar/>
+                  <Avatar
+                    src={profile.avatar}
+                    aria-controls={"user-menu"}
+                    onClick={handleUserMenuOpen}
+                    style={{ cursor: "pointer" }}
+                  />
+                  <Menu
+                    id="user-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleUserMenuClose}
+                    elevation={0}
+                    style={{ zIndex: 1302, top: "40px" }}
+                  >
+                    <MenuItem
+                      onClick={() => (
+                        handleUserMenuClose(),
+                        console.log("to user account overview")
+                      )}
+                    >
+                      {profile.firstName}
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => (
+                        handleUserMenuClose(), console.log("edit profile")
+                      )}
+                    >
+                      Edit profile
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => (
+                        handleUserMenuClose(), console.log("your calendar")
+                      )}
+                    >
+                      Calendar
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => (
+                        handleUserMenuClose(), console.log("your favourites")
+                      )}
+                    >
+                      Favourites
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => (handleUserMenuClose(), handleSignOut())}
+                    >
+                      Sign Out
+                    </MenuItem>
+                  </Menu>
                 </Grid>
               </Grid>
             </div>
