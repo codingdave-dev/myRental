@@ -24,13 +24,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginForm = ({
+const ResetPasswordForm = ({
   login,
   handleSubmit,
   error,
   submitting,
   setForgotPassword,
-    setLogin
 }) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -42,15 +41,6 @@ const LoginForm = ({
             label={"Email"}
             name={"email"}
             type={"text"}
-            variant={"outlined"}
-            component={TextInput}
-          />
-        </Grid>
-        <Grid item style={{ marginTop: "1.5em" }}>
-          <Field
-            label={"Password"}
-            name={"password"}
-            type={"password"}
             variant={"outlined"}
             component={TextInput}
           />
@@ -71,28 +61,18 @@ const LoginForm = ({
             type={"submit"}
             disabled={submitting}
           >
-            LOGIN
+            Reset
           </Button>
         </Grid>
         <Grid item>
-          <Grid item container direction={'column'} alignItems={"center"}>
+          <Grid item container justify={"center"}>
             <Grid item>
               <Typography
                 variant={"caption"}
-                onClick={() => setForgotPassword(true)}
+                onClick={() => setForgotPassword(false)}
                 style={{ cursor: "pointer" }}
               >
-                Forgot Password?
-              </Typography>
-            </Grid>
-            {/*DELETE AFTER*/}
-            <Grid item>
-              <Typography
-                  variant={"caption"}
-                  onClick={() => setLogin(false)}
-                  style={{ cursor: "pointer" }}
-              >
-                Register?
+                Login?
               </Typography>
             </Grid>
           </Grid>
@@ -105,4 +85,4 @@ const LoginForm = ({
 export default connect(
   null,
   actions
-)(reduxForm({ form: "loginForm" })(LoginForm));
+)(reduxForm({ form: "resetPasswordForm" })(ResetPasswordForm));

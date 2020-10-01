@@ -23,9 +23,11 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { openDialog } from "../store/actions/dialogActions/dialogActions";
 import { connect } from "react-redux";
 import { logout } from "../store/actions/authActions/authActions";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Avatar from "@material-ui/core/Avatar";
 
 const actions = {
-  openDialog,
   logout,
 };
 
@@ -48,69 +50,30 @@ function ElevationScroll(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  tabs: {
+    "& .MuiTabs-indicator": {
+      backgroundColor: theme.palette.common.white,
+    },
+  },
+  tab: {
+    ...theme.typography.tab,
+    minWidth: 10,
+    marginLeft: "20px",
+    color: theme.palette.common.white,
+    "&:hover": {
+      color: theme.palette.common.white,
+      opacity: 1,
+    },
+  },
+  drawer: {
+    backgroundColor: theme.palette.primary.main,
+  },
   toolbarMargin: {
     ...theme.mixins.toolbar,
     marginBottom: "3em",
     [theme.breakpoints.down("md")]: {
       marginBottom: "2em",
     },
-  },
-  logo: {
-    height: "3.5em",
-    [theme.breakpoints.down("md")]: {
-      height: "3em",
-    },
-  },
-  logoContainer: {
-    marginLeft: "0.5em",
-    padding: 0,
-    "&:hover": {
-      backgroundColor: "transparent",
-    },
-  },
-  tabContainer: {
-    marginLeft: "auto",
-  },
-  tab: {
-    ...theme.typography.tab,
-    minWidth: 10,
-    marginLeft: "25px",
-    "&:hover": {
-      color: theme.palette.common.white,
-      opacity: 1,
-    },
-  },
-  tabEnd: {
-    ...theme.typography.tab,
-    marginRight: "25px",
-  },
-
-  menu: {
-    marginTop: "3em",
-    color: "white",
-    borderRadius: "0px",
-  },
-  menuItem: {
-    ...theme.typography.tab,
-    opacity: 0.7,
-    "&:hover": {
-      opacity: 1,
-    },
-  },
-
-  drawerIconContainer: {
-    marginLeft: "auto",
-    "&:hover": {
-      backgroundColor: "transparent",
-    },
-  },
-  drawerIcon: {
-    color: theme.palette.common.white,
-    height: "30px",
-    width: "30px",
-  },
-  drawer: {
-    backgroundColor: theme.palette.primary.main,
   },
   drawerItem: {
     ...theme.typography.tab,
@@ -123,120 +86,68 @@ const useStyles = makeStyles((theme) => ({
       opacity: 1,
     },
   },
+
+  drawerIconContainer: {
+    // marginLeft: "auto",
+    "&:hover": {
+      backgroundColor: "transparent",
+    },
+  },
+  drawerIcon: {
+    color: theme.palette.common.white,
+    height: "30px",
+    width: "30px",
+  },
+
   appBar: {
     zIndex: theme.zIndex.modal + 1,
   },
-  navButton: {
-    color: theme.palette.common.white,
-    border: "1px solid" + theme.palette.common.white,
-    fontFamily: "Raleway",
-    textTransform: "none",
-    fontWeight: "500",
-    fontSize: "1rem",
+
+  tabEnd: {
+    ...theme.typography.tab,
+    marginRight: "25px",
   },
+  userContainer: {
+    marginRight: '1em'
+  },
+  userInfoContainer: {
+    marginRight: '0.7em'
+  },
+  userName: {
+    color: theme.palette.common.white,
+    fontWeight: 600
+  },
+  userLocation: {
+
+  }
 }));
 
-const Header = ({
-  value,
-  setValue,
-  selectedIndex,
-  setSelectedIndex,
-  openDialog,
-  logout,
-  auth,
-  profile,
-  admin,
-}) => {
+const Header = ({ value, setValue, selectedIndex, setSelectedIndex }) => {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|ipod/.test(navigator.userAgent);
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [openDrawer, setOpenDrawer] = useState(false);
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [open, setOpen] = useState(false);
-
-  // AUTHENTICATION
-  const authenticated = auth.isLoaded && !auth.isEmpty && profile.isLoaded && !profile.isEmpty;
-
-
-  // SIGNIN/SIGNOUT/REGISTER HANDLERS
-  const handleRegister = () => {
-    openDialog("RegisterDialog");
-  }
-  const handleSignIn = () => {
-    openDialog("LoginDialog");
-  };
-
-  const handleSignOut = () => {
-
-    setValue(0)
-    setSelectedIndex(0)
-    setAnchorEl(null);
-    logout();
-  };
+  const [openDrawer, setOpenDrawer] = useState(true);
 
   const handleChange = (e, newValue) => {
     setValue(newValue);
   };
 
-  const handleClick = (e) => {
-    setAnchorEl(e.currentTarget);
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-    setOpen(false);
-  };
-
-  const handleMenuItemClick = (e, i) => {
-    setAnchorEl(null);
-    setOpen(true);
-    setSelectedIndex(i);
-  };
-
-  // MENU OPTIONS
-
-  const authMenuOptions = [
-    {
-      name: "Add Listing",
-      link: "/listing/newListing",
-      activeIndex: 5,
-      selectedIndex: 0,
-    }
-  ];
-
   const routes = [
-    { name: "Home", link: "/", activeIndex: 0 },
-
+    { name: "Dashboard", link: "/dashboard", activeIndex: 0 },
+    { name: "Contacts", link: "/contacts", activeIndex: 1 },
+    { name: "Opportunities", link: "/opportunities", activeIndex: 2 },
+    { name: "Warehouse", link: "/warehouse", activeIndex: 3 },
+    { name: "Transport", link: "/transport", activeIndex: 4 },
+    { name: "Labour", link: "/labour", activeIndex: 5 },
+    { name: "Inventory", link: "/inventory", activeIndex: 6 },
+    { name: "Accounts", link: "/accounts", activeIndex: 7 },
+    { name: "Settings", link: "/settings", activeIndex: 8 },
   ];
-
-  const authRoutes = [
-    {
-      name: "Admin Area",
-      link: "/admin",
-      activeIndex: 4,
-    }
-  ];
-
-  const buttonRoutes = [
-    {
-      name: "Login",
-      onClick: () => handleSignIn(),
-    },
-    {
-      name: "Register",
-      onClick: () => handleRegister(),
-    },
-  ];
-
-
-
-
 
   useEffect(() => {
-    [...authMenuOptions, ...authRoutes, ...routes].forEach((route) => {
+    [...routes].forEach((route) => {
       switch (window.location.pathname) {
         case `${route.link}`:
           if (value !== route.activeIndex) {
@@ -250,107 +161,26 @@ const Header = ({
           break;
       }
     });
-  }, [
-    value,
-    setValue,
-    authMenuOptions,
-      authRoutes,
-    selectedIndex,
-    setSelectedIndex,
-    routes,
-  ]);
+  }, [value, setValue, selectedIndex, setSelectedIndex, routes]);
 
   const tabs = (
-      <Fragment>
-        {authenticated || !authenticated ? <Fragment>
-          <Tabs
-              value={value}
-              onChange={handleChange}
-              className={classes.tabContainer}
-          >
-            {routes.map((route, index) => (
-                <Tab
-                    key={`${route}${index}`}
-                    className={classes.tab}
-                    component={Link}
-                    href={route.link}
-                    label={route.name}
-                />
-            ))}
+    <Fragment>
+      <Tabs value={value} onChange={handleChange} className={classes.tabs}>
+        {routes.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            href={route.link}
+            label={route.name}
+          />
+        ))}
 
-            {/*AUTH ROUTES*/}
-            {authenticated &&
-            authenticated &&
-            authRoutes.map((route, index) => (
-                <Tab
-                    key={`${route}${index}`}
-                    className={
-                      route.end ? classes.tab + " " + classes.tabEnd : classes.tab
-                    }
-                    component={Link}
-                    href={route.link}
-                    label={route.name}
-                    aria-owns={route.ariaOwns}
-                    aria-haspopup={route.ariaPopup}
-                    onMouseOver={route.mouseOver}
-                />
-            ))}
-          </Tabs>
 
-          {/*DROPDOWN MENU*/}
-          <Menu
-              id={"simple-menu"}
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              classes={{ paper: classes.menu }}
-              MenuListProps={{ onMouseLeave: handleClose }}
-              elevation={0}
-              style={{ zIndex: 1302 }}
-              keepMounted
-          >
-            {authMenuOptions.map((option, i) => (
-                <MenuItem
-                    key={option.name}
-                    component={Link}
-                    href={option.link}
-                    classes={{ root: classes.menuItem }}
-                    onClick={(event) => {
-                      handleMenuItemClick(event, i);
-                      setValue(option.activeIndex);
-                      setSelectedIndex(option.selectedIndex)
-                      handleClose();
-                      if (option.link === '/logout') {
-                        handleSignOut()
-                      }
-                    }}
-                    selected={i === selectedIndex && value === 1}
-                >
-                  {option.name}
-                </MenuItem>
-            ))}
-          </Menu>
+      </Tabs>
 
-          {/*NO AUTH BUTTONS*/}
-          {!authenticated &&
-          !authenticated &&
-          buttonRoutes.map((button) => (
-              <Button
-                  key={button.name}
-                  variant="outlined"
-                  className={classes.navButton}
-                  style={{
-                    marginLeft: button.name === "Login" ? "25px" : "5px",
-                    marginRight: button.name === "Login" ? null : "25px",
-                  }}
-                  onClick={button.onClick}
-              >
-                {button.name}
-              </Button>
-          ))}
-        </Fragment> : null}
-      </Fragment>
 
+    </Fragment>
   );
 
   const drawer = (
@@ -365,7 +195,6 @@ const Header = ({
       >
         <div className={classes.toolbarMargin} />
         <List disablePadding>
-
           {routes.map((route) => (
             <ListItem
               key={`${route}${route.activeIndex}`}
@@ -386,76 +215,6 @@ const Header = ({
               </ListItemText>
             </ListItem>
           ))}
-
-          {authenticated && authenticated && (
-              <div style={{marginTop: '1em'}}>
-                {authRoutes.map((route) => (
-                    <ListItem
-                        key={`${route}${route.activeIndex}`}
-                        onClick={() => {
-                          setOpenDrawer(false);
-                          setValue(route.activeIndex);
-                          setSelectedIndex(null);
-                        }}
-                        divider
-                        button
-                        component={Link}
-                        href={route.link}
-                        selected={value === route.activeIndex}
-                        classes={{ selected: classes.drawerItemSelected }}
-                    >
-                      <ListItemText className={classes.drawerItem} disableTypography>
-                        {route.name}
-                      </ListItemText>
-                    </ListItem>
-                ))}
-              </div>
-          )}
-
-
-
-
-
-          {!authenticated &&
-            !authenticated &&
-            buttonRoutes.map((button) => (
-              <ListItem
-                key={button.name}
-                onClick={button.onClick}
-                divider
-                button
-              >
-                <ListItemText className={classes.drawerItem} disableTypography>
-                  {button.name}
-                </ListItemText>
-              </ListItem>
-            ))}
-
-          {authenticated &&
-            authenticated &&
-            authMenuOptions.map((route) => (
-              <ListItem
-                key={route.selectedIndex}
-                onClick={() => {
-                  setOpenDrawer(false);
-                  setSelectedIndex(route.selectedIndex);
-                  if (route.link === '/logout') {
-                    handleSignOut()
-                  }
-                }}
-                divider
-                button
-                component={Link}
-                href={route.link}
-                selected={selectedIndex === route.selectedIndex}
-                classes={{ selected: classes.drawerItemSelected }}
-
-              >
-                <ListItemText className={classes.drawerItem} disableTypography>
-                  {route.name}
-                </ListItemText>
-              </ListItem>
-            ))}
         </List>
       </SwipeableDrawer>
 
@@ -466,6 +225,8 @@ const Header = ({
       >
         <MenuIcon className={classes.drawerIcon} />
       </IconButton>
+
+
     </Fragment>
   );
 
@@ -474,21 +235,24 @@ const Header = ({
       <ElevationScroll>
         <AppBar position={"fixed"} className={classes.appBar}>
           <Toolbar disableGutters>
-            <Button
-              component={Link}
-              href={"/"}
-              disableRipple
-              className={classes.logoContainer}
-              onClick={() => setValue(0)}
-            >
-              <img
-                src={"/assets/logo/dg_logo.jpg"}
-                className={classes.logo}
-                alt="company-logo"
-              />
-            </Button>
-
             {matches ? drawer : tabs}
+            <div style={{marginLeft: 'auto'}}>
+              <Grid item container className={classes.userContainer}>
+                <Grid item className={classes.userInfoContainer}>
+                  <Grid item container direction={'column'} alignItems={'flex-end'} >
+                    <Grid item>
+                      <Typography variant={'caption'} className={classes.userName}>Full Name</Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant={'caption'} className={classes.userLocation}>Location</Typography>
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <Grid item>
+                  <Avatar/>
+                </Grid>
+              </Grid>
+            </div>
           </Toolbar>
         </AppBar>
       </ElevationScroll>

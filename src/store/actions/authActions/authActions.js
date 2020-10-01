@@ -7,7 +7,7 @@ export const registerUser = (creds) => {
     const firestore = getFirestore()
     try {
       // FIREBASE CREATE USER
-      let createdUser = await firebase.auth().createUserWithEmailAndPassword(creds.email, creds.password1)
+      let createdUser = await firebase.auth().createUserWithEmailAndPassword(creds.email, creds.password)
 
       await createdUser.user.updateProfile({displayName: creds.firstName + ' ' + creds.lastName})
 
@@ -24,7 +24,6 @@ export const registerUser = (creds) => {
 
       await firestore.set(`users/${createdUser.user.uid}`, {...newUser})
 
-      dispatch(closeDialog());
     } catch (error) {
       let errorMessage = "";
       if (error.message === "The email address is badly formatted.") {
