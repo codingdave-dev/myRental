@@ -6,6 +6,7 @@ import { firestoreReducer } from "redux-firestore";
 import asyncReducer from '../asyncReducers/asyncReducers'
 
 import dialogReducer from '../dialogReducer/dialogReducer'
+import globalReducer from "../globalReducer/globalReducer";
 
 
 const rootReducer = combineReducers({
@@ -22,6 +23,8 @@ const rootReducer = combineReducers({
   // DIALOG REDUCER
   dialog: dialogReducer,
 
+  // GLOBAL SETTINGS
+  global: globalReducer
 
 
 });

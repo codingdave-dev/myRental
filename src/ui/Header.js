@@ -27,9 +27,11 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import { useRouter } from "next/router";
+import {fetchGlobalSettings} from "../store/actions/globalActions/globalActions";
 
 const actions = {
   logout,
+  fetchGlobalSettings
 };
 
 const mapStateToProps = (state) => ({
@@ -131,6 +133,7 @@ const Header = ({
   auth,
   profile,
   logout,
+    fetchGlobalSettings
 }) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -188,7 +191,8 @@ const Header = ({
           break;
       }
     });
-  }, [value, setValue, selectedIndex, setSelectedIndex, routes, auth]);
+    fetchGlobalSettings()
+  }, [value, setValue, selectedIndex, setSelectedIndex, routes, auth, fetchGlobalSettings]);
 
   const tabs = (
     <Fragment>
