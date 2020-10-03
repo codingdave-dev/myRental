@@ -16,7 +16,8 @@ const theme = createMuiTheme({
     },
     common: {
       background: themeBackground,
-      hyperlink: hyperlinkBlue
+      hyperlink: hyperlinkBlue,
+      textGrey: textGrey
     },
   },
   typography: {
@@ -39,7 +40,6 @@ const theme = createMuiTheme({
 
 
     caption: {
-      color: textGrey,
       fontFamily: "Raleway",
       lineHeight: 1,
     },
