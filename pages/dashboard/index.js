@@ -58,6 +58,38 @@ const Index = ({
   useEffect(() => {
     fetchGlobalDashboardValues(), fetchUserDashboardValues(profile.uid);
   }, [profile, fetchGlobalDashboardValues, fetchUserDashboardValues]);
+
+
+  const stats = [
+    {
+      id: 1,
+      title: 'Activities starting today',
+      value: values.acitvity
+    },
+    {
+      id: 2,
+      title: 'Upcoming orders & reservations with shortages',
+      value: values.shortages
+    },
+    {
+      id: 3,
+      title: 'Transport today',
+      value1: 1,
+      value2: 2,
+      subText1: 'Deliveries',
+      subText2: 'Pickups',
+      dual: true
+    },
+    {
+      id: 4,
+      title: 'Customer transport today',
+      value1: -1,
+      value2: -2,
+      subText1: 'Pickups',
+      subText2: 'Returns',
+      dual: true
+    }
+  ]
   return (
     <Grid
       container
@@ -109,15 +141,13 @@ const Index = ({
 
       {/*INFORMATION BOXES*/}
       <Grid item container spacing={2}>
-        <Grid item lg={3} >
-          <DashboardItem
-              title={'Activities Starting Today'} value={20} value1={10} value2={30} subText1={'left'} subText2={'right'}
-          />
-        </Grid>
-
-        <Grid item lg={3}>
-          <DashboardItem dual/>
-        </Grid>
+        {stats.map(stat => (
+            <Grid item lg={3} key={stat.id}>
+              <DashboardItem
+                  title={stat.title} value={stat.value} value1={stat.value1} value2={stat.value2} subText1={stat.subText1} subText2={stat.subText2} dual={stat.dual}
+              />
+            </Grid>
+        ))}
 
       </Grid>
     </Grid>

@@ -39,7 +39,6 @@ export const fetchUserDashboardValues = (id) => {
       let acitvity = await activityQuery.get();
       let shortages = await shortagesQuery.get();
 
-      console.log(acitvity.size);
 
       let values = [];
 
