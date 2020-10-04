@@ -47,47 +47,52 @@ const DashboardItem = ({
       <Grid item className={classes.title}>
         <Typography variant={"subtitle1"}>{title}</Typography>
       </Grid>
+
       {!dual && (
-        <Grid item>
-          <Typography variant={"h3"} className={classes.value}>
-            {value}
-          </Typography>
-        </Grid>
+          <Grid item >
+            <Typography variant={"h3"} className={classes.value}>
+              {value}
+            </Typography>
+          </Grid>
       )}
 
       {dual && (
-        <Grid item container>
-          <Grid item lg={6}>
-            <Grid item container direction={"column"} alignItems={"center"}>
-              <Grid item>
-                <Typography variant={"h3"} className={classes.subValue}>
-                  {value1}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant={"caption"} className={classes.subText}>
-                  {subText1}
-                </Typography>
+          <Grid item container>
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Grid item container direction={"column"} alignItems={"center"}>
+                <Grid item>
+                  <Typography variant={"h3"} className={classes.subValue}>
+                    {value1}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant={"caption"} className={classes.subText}>
+                    {subText1}
+                  </Typography>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
 
-          <Grid item lg={6}>
-            <Grid item container direction={"column"} alignItems={"center"}>
-              <Grid item>
-                <Typography variant={"h3"} className={classes.subValue}>
-                  {value2}
-                </Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant={"caption"} className={classes.subText}>
-                  {subText2}
-                </Typography>
+            <Grid item lg={6} md={6} sm={6} xs={6}>
+              <Grid item container direction={"column"} alignItems={"center"}>
+                <Grid item>
+                  <Typography variant={"h3"} className={classes.subValue}>
+                    {value2}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant={"caption"} className={classes.subText}>
+                    {subText2}
+                  </Typography>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
       )}
+
+
+
+
     </Grid>
   );
 };

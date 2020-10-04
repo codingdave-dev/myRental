@@ -103,7 +103,7 @@ const Index = ({
 
       {/*PIPELINE*/}
       <Grid item container className={classes.pipelineContainer} >
-        <Grid item lg={3}>
+        <Grid item lg={3} md={3} sm={6} xs={12}>
           <PipelineItem
             userValue={values.userInquiries}
             pipelineTotalValue={globalValues.globalInquiries}
@@ -111,7 +111,7 @@ const Index = ({
             subTitle={"Out Of"}
           />
         </Grid>
-        <Grid item lg={3}>
+        <Grid item lg={3} md={3} sm={6} xs={12}>
           <PipelineItem
             userValue={values.userQuotes}
             pipelineTotalValue={globalValues.globalQuotes}
@@ -120,7 +120,7 @@ const Index = ({
           />
         </Grid>
 
-        <Grid item lg={3}>
+        <Grid item lg={3} md={3} sm={6} xs={12}>
           <PipelineItem
             userValue={values.userOrders}
             pipelineTotalValue={globalValues.globalOrders}
@@ -128,7 +128,7 @@ const Index = ({
             subTitle={"Out Of"}
           />
         </Grid>
-        <Grid item lg={3}>
+        <Grid item lg={3} md={3} sm={6} xs={12}>
           <PipelineItem
             userValue={values.userOrderValue}
             pipelineTotalValue={globalValues.globalOrderValue}
@@ -142,7 +142,7 @@ const Index = ({
       {/*INFORMATION BOXES*/}
       <Grid item container spacing={2}>
         {stats.map(stat => (
-            <Grid item lg={3} key={stat.id}>
+            <Grid item lg={3} md={4} sm={6} xs={12}  key={stat.id}>
               <DashboardItem
                   title={stat.title} value={stat.value} value1={stat.value1} value2={stat.value2} subText1={stat.subText1} subText2={stat.subText2} dual={stat.dual}
               />
