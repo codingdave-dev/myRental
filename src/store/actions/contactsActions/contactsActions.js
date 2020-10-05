@@ -4,7 +4,6 @@ import {
   asyncActionStart,
 } from "../asyncActions/asyncActions";
 import {
-  FETCH_ALL_CONTACTS_ORGANIZATIONS_VENUES,
   FETCH_ALL_USERS,
 } from "../../constants/contactsConstants/contactsConstants";
 

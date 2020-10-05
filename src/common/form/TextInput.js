@@ -23,6 +23,7 @@ const TextInput = ({input, label, type, variant, required, meta:{touched, error}
                 type={type}
                 variant={variant}
                 fullWidth
+                size={'small'}
             />
             {touched && error && (
                 <Typography variant={'subtitle1'} className={classes.error}>{error}</Typography>

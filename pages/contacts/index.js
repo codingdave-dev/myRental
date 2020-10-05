@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import { fetchAllUsers } from "../../src/store/actions/contactsActions/contactsActions";
 import { connect } from "react-redux";
 import ContactsTable from "../../src/ui/contacts/ContactsTable";
+import {useRouter} from "next/router";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -18,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
   buttonWrapper: {
     paddingLeft: "0.5em",
   },
+  tableContainer: {
+    marginTop: '2em'
+  }
 }));
 
 const actions = {
@@ -39,6 +43,7 @@ const Index = ({ fetchAllUsers, users }) => {
   const classes = useStyles();
   const theme = useTheme();
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+  const router = useRouter()
 
   const [searchResults, setSearchResults] = useState([]);
 
@@ -46,7 +51,6 @@ const Index = ({ fetchAllUsers, users }) => {
     fetchAllUsers();
   }, []);
 
-  console.log(searchResults);
   return (
     <Grid
       container
@@ -66,12 +70,17 @@ const Index = ({ fetchAllUsers, users }) => {
         <Grid item lg={6} md={6} sm={12} xs={12}>
           <Grid item container justify={"flex-end"}>
             <Grid item className={classes.buttonWrapper}>
-              <Button variant={"outlined"} color={"primary"} size={"small"}>
+              <Button variant={"outlined"} color={"primary"} size={"small"} onClick={() => router.push({pathname: '/contacts/new/contact'})}>
                 Add Contact
               </Button>
             </Grid>
             <Grid item className={classes.buttonWrapper}>
-              <Button variant={"outlined"} color={"primary"} size={"small"}>
+              <Button variant={"outlined"} color={"primary"} size={"small"} onClick={() => router.push({pathname: '/contacts/new/organization'})}>
+                Add Organization
+              </Button>
+            </Grid>
+            <Grid item className={classes.buttonWrapper}>
+              <Button variant={"outlined"} color={"primary"} size={"small"} onClick={() => router.push({pathname: '/contacts/new/venue'})}>
                 Add Venue
               </Button>
             </Grid>
@@ -79,7 +88,7 @@ const Index = ({ fetchAllUsers, users }) => {
         </Grid>
       </Grid>
 
-      <Grid item container>
+      <Grid item container className={classes.tableContainer}>
         <ContactsTable
           rows={searchResults < 1 ? users : users.filter((user) => user.search)}
         />

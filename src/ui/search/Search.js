@@ -61,6 +61,7 @@ const Search = ({data, setSearchResults}) => {
                 variant={"outlined"}
                 className={classes.searchBox}
                 color={"primary"}
+                autoComplete={'off'}
             />
         </Grid>
     );

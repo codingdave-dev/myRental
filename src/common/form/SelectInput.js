@@ -29,6 +29,7 @@ const SelectInput = ({
         name={name}
         variant={variant}
         label={label}
+        size={'small'}
       >
         {children}
       </TextField>
