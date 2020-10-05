@@ -8,6 +8,7 @@ import asyncReducer from '../asyncReducers/asyncReducers'
 import dialogReducer from '../dialogReducer/dialogReducer'
 import globalReducer from "../globalReducer/globalReducer";
 import dashboardReducer from "../dashboardReducer/dashboardReducer";
+import contactsReducer from "../contactsReducer/contactsReducer";
 
 
 const rootReducer = combineReducers({
@@ -28,7 +29,10 @@ const rootReducer = combineReducers({
   global: globalReducer,
 
   // DASHBOARD REDUCER
-  dashboard: dashboardReducer
+  dashboard: dashboardReducer,
+
+  // CONTACTS REDUCER
+  contacts: contactsReducer
 
 
 });
