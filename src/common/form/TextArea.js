@@ -26,6 +26,7 @@ const TextArea = ({input, label, type, variant, rows, required, width, meta:{tou
                 multiline
                 rows={rows}
                 fullWidth
+                size={'small'}
             />
             {touched && error && (
                 <Typography variant={'subtitle1'} className={classes.error}>{error}</Typography>

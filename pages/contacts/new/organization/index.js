@@ -5,11 +5,12 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Field, reduxForm } from "redux-form";
-import ContactPhoneIcon from '@material-ui/icons/ContactPhone';
+import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 import TextInput from "../../../../src/common/form/TextInput";
 import Telephone from "../../../../src/ui/contacts/forms/ContactBookForm";
 import ContactBookForm from "../../../../src/ui/contacts/forms/ContactBookForm";
-
+import PrimaryAddressForm from "../../../../src/ui/contacts/forms/PrimaryAddressForm";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -18,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
   fieldWrapper: {
     paddingTop: "0.3em",
     paddingBottom: "0.3em",
+  },
+  icon: {
+    fontSize: "3em",
+    color: theme.palette.common.textGrey,
   },
 }));
 
@@ -161,8 +166,10 @@ const Index = () => {
 
           {/*CONTACT CONTAINER*/}
           <Grid item container style={{ marginTop: "2em" }}>
-            <Grid item lg={2}>
-              <ContactPhoneIcon/>
+            <Grid item container justify={"center"} lg={2}>
+              <Grid item>
+                <ContactPhoneIcon className={classes.icon} />
+              </Grid>
             </Grid>
             <Grid item lg={8}>
               <Grid item>
@@ -208,13 +215,44 @@ const Index = () => {
           </Grid>
 
           <hr
-              style={{
-                border: "1px solid lightgrey",
-                marginTop: "2em",
-                marginBottom: "2em",
-                width: "95%",
-              }}
+            style={{
+              border: "1px solid lightgrey",
+              marginTop: "2em",
+              marginBottom: "2em",
+              width: "95%",
+            }}
           />
+
+          {/*ADDRESS CONTAINER*/}
+          <Grid item container style={{ marginTop: "2em" }}>
+            <Grid item container justify={"center"} lg={2}>
+              <Grid item>
+                <LocationOnIcon className={classes.icon} />
+              </Grid>
+            </Grid>
+            <Grid item lg={8}>
+              <Grid item>
+
+                <PrimaryAddressForm/>
+
+              </Grid>
+              <Grid item style={{ marginTop: "1em" }}>
+                <ContactBookForm
+                  children={email}
+                  buttonName={"add a email"}
+                  formName={"newOrganization"}
+                  arrayName={"email"}
+                  placeholder1={"Email"}
+                  placeholder2={"Select an option"}
+                  inputName1={"email"}
+                  inputName2={"type"}
+                />
+              </Grid>
+            </Grid>
+            <Grid item lg={2}>
+              {/*BLANK*/}
+            </Grid>
+          </Grid>
 
           {/*BUTTON CONTAINER*/}
           <Grid item container direction={"column"}>
